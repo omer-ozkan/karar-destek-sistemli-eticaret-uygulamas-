@@ -1,0 +1,269 @@
+<app-blank pageTitle="Ana Sayfa" [breadcrumbs]="[]"></app-blank>
+
+<div class="page-header d-flex justify-content-between align-items-center">
+  <h1 class="page-title">Gösterge Paneli</h1>
+  <div class="d-flex header-actions">
+    <button class="btn btn-sm btn-primary" (click)="refresh()" [disabled]="loading()">
+      <span class="material-symbols-outlined">refresh</span> Yenile
+    </button>
+  </div>
+</div>
+
+@if (loading()) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2 text-muted">Veriler yükleniyor...</p>
+  </div>
+} @else {
+  <div class="row g-3 mb-4">
+    <div class="col-md-6 col-lg-3">
+      <div class="card stat-card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h6 class="card-subtitle text-muted">Toplam Gelir</h6>
+              <h4 class="card-title mt-2">{{ totalRevenue() | trCurrency: '₺': false }}</h4>
+            </div>
+            <div class="stat-icon bg-primary-light">
+              <span class="material-symbols-outlined text-primary">attach_money</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="card stat-card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h6 class="card-subtitle text-muted">Toplam Sipariş</h6>
+              <h4 class="card-title mt-2">{{ totalOrders() }}</h4>
+            </div>
+            <div class="stat-icon bg-success-light">
+              <span class="material-symbols-outlined text-success">shopping_cart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="card stat-card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h6 class="card-subtitle text-muted">Kargoda</h6>
+              <h4 class="card-title mt-2">{{ shippingCount() }}</h4>
+            </div>
+            <div class="stat-icon bg-info-light">
+              <span class="material-symbols-outlined text-info">local_shipping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="card stat-card h-100 border-0 shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <h6 class="card-subtitle text-muted">Toplam Kullanıcı</h6>
+              <h4 class="card-title mt-2">{{ totalUsers() }}</h4>
+            </div>
+            <div class="stat-icon bg-warning-light">
+              <span class="material-symbols-outlined text-warning">group</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="card-title mb-0">Son Siparişler</h5>
+      <a routerLink="/orders" class="btn btn-sm btn-link">Tümünü Gör</a>
+    </div>
+    <div class="card-body p-0">
+      @if (recentOrders().length === 0) {
+        <div class="alert alert-info m-3 mb-0">Henüz sipariş bulunmuyor.</div>
+      } @else {
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Sipariş No</th>
+                <th>Müşteri</th>
+                <th>Şehir</th>
+                <th>Durum</th>
+                <th>Tarih</th>
+                <th>Tutar</th>
+                <th>İşlem</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of recentOrders(); track order.id) {
+                <tr>
+                  <td>{{ order.orderNumber }}</td>
+                  <td>{{ order.fullName }}</td>
+                  <td>{{ order.city }}</td>
+                  <td>
+                    <div class="d-flex align-items-center gap-2 flex-wrap">
+                      <span class="badge" [class]="orderStatusClass(order.status)">
+                        {{ orderStatusLabel(order.status) }}
+                      </span>
+                      <select
+                        class="form-select form-select-sm"
+                        style="max-width: 170px"
+                        [ngModel]="orderStatusLabel(order.status)"
+                        (ngModelChange)="changeStatus(order, $event)"
+                      >
+                        @for (status of statuses; track status) {
+                          <option [value]="status">{{ status }}</option>
+                        }
+                      </select>
+                    </div>
+                  </td>
+                  <td>{{ order.date | date: 'dd.MM.yyyy HH:mm' }}</td>
+                  <td>{{ orderAmount(order) | trCurrency: '₺': false }}</td>
+                  <td>
+                    @if (canMarkAsShipped(order.status)) {
+                      <button
+                        class="btn btn-sm btn-info text-white"
+                        type="button"
+                        (click)="markAsShipped(order)"
+                      >
+                        <span class="material-symbols-outlined align-middle" style="font-size: 18px">local_shipping</span>
+                        Kargoya Ver
+                      </button>
+                    } @else {
+                      <span class="text-muted small">—</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">En Çok Satan Ürünler</h5>
+          <a routerLink="/products" class="btn btn-sm btn-link">Tümünü Gör</a>
+        </div>
+        <div class="card-body p-0">
+          @if (topProducts().length === 0) {
+            <div class="alert alert-info m-3 mb-0">Sipariş verisi yok.</div>
+          } @else {
+            <div class="table-responsive">
+              <table class="table mb-0">
+                <thead>
+                  <tr>
+                    <th>Ürün</th>
+                    <th>Kategori</th>
+                    <th>Adet</th>
+                    <th>Gelir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (product of topProducts(); track product.name) {
+                    <tr>
+                      <td>{{ product.name }}</td>
+                      <td>{{ product.categoryName }}</td>
+                      <td>{{ product.quantity }}</td>
+                      <td>{{ product.revenue | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card h-100 border-0 shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">En İyi Müşteriler</h5>
+          <a routerLink="/users" class="btn btn-sm btn-link">Tümünü Gör</a>
+        </div>
+        <div class="card-body p-0">
+          @if (topCustomers().length === 0) {
+            <div class="alert alert-info m-3 mb-0">Sipariş verisi yok.</div>
+          } @else {
+            <div class="table-responsive">
+              <table class="table mb-0">
+                <thead>
+                  <tr>
+                    <th>Müşteri</th>
+                    <th>Sipariş</th>
+                    <th>Harcanan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (customer of topCustomers(); track customer.name) {
+                    <tr>
+                      <td>{{ customer.name }}</td>
+                      <td>{{ customer.orderCount }}</td>
+                      <td>{{ customer.spent | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">
+        <span class="material-symbols-outlined me-2">contact_mail</span>
+        Kullanıcı İletişim Bilgileri
+        <span class="badge bg-secondary ms-2">{{ totalUsers() }}</span>
+      </h5>
+      <a routerLink="/users" class="btn btn-sm btn-link">Tümünü Gör</a>
+    </div>
+    <div class="card-body p-0">
+      @if (users().length === 0) {
+        <div class="alert alert-info m-3 mb-0">Henüz kayıtlı kullanıcı bulunmuyor.</div>
+      } @else {
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Ad Soyad</th>
+                <th>Kullanıcı Adı</th>
+                <th>E-posta</th>
+                <th class="text-center">Admin</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of users(); track item.id) {
+                <tr>
+                  <td>{{ item.fullName }}</td>
+                  <td>{{ item.userName }}</td>
+                  <td>{{ item.email }}</td>
+                  <td class="text-center">
+                    @if (item.isAdmin) {
+                      <span class="badge bg-success">Evet</span>
+                    } @else {
+                      <span class="badge bg-secondary">Hayır</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+}

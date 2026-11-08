@@ -1,0 +1,77 @@
+  <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" routerLink="/" style="cursor: pointer;">
+                <img src="/storeLogo.png" alt="TechStore Logo" style="height:50px; width:auto; margin-right:2px; vertical-align:middle; display:inline-block;" />
+                <h2 style="display:inline-block; vertical-align:middle; margin:0;">Store</h2>
+            </div>
+            <ul class="nav-menu">
+                @for(val of data(); track val.id){
+                     <li>
+                        <a [routerLink]="['/','products',val.url]" class="nav-link">{{val.name}}</a>
+                    </li>
+                }
+            </ul>
+            <div class="nav-icons">
+                <div routerLink="/baskets" class="cart-icon-container">
+                    <i class="fas fa-shopping-cart"></i>
+                    @if(basketCount() > 0){
+                        <div class="cart-badge">{{basketCount()}}</div>
+                    }
+                </div>
+                <i routerLink="/orders" class="fa-solid fa-dolly cursor" title="Siparişlerim"></i>
+                 <i class="fas fa-search"></i>
+
+                @if(user()){
+                    <i class="fa fa-sign-out" (click)="logout()" title="Çıkış Yap" aria-hidden="true"></i>
+                }@else{
+                    <i class="fas fa-user" routerLink="/auth/login" title="Giriş Yap"></i>
+                }
+
+            </div>
+        </div>
+    </nav>
+
+    <router-outlet />
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechStore</h3>
+                    <p>Teknolojinin gücünü yaşayın</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kategoriler</h4>
+                    <ul>
+                        <li><a href="#">Telefon</a></li>
+                        <li><a href="#">Laptop</a></li>
+                        <li><a href="#">Tablet</a></li>
+                        <li><a href="#">Aksesuar</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Müşteri Hizmetleri</h4>
+                    <ul>
+                        <li><a href="#">İletişim</a></li>
+                        <li><a href="#">Kargo Takip</a></li>
+                        <li><a href="#">İade & Değişim</a></li>
+                        <li><a href="#">SSS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Bizi Takip Edin</h4>
+                    <div class="social-icons">
+                        <i class="fab fa-facebook"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-youtube"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Store. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>

@@ -1,0 +1,10 @@
+<ol class="breadcrumb">
+  @for(val of data(); track val.url){
+  <li class="breadcrumb-item">
+    <a [routerLink]="val.url" class="d-flex align-items-center">
+      <span class="material-symbols-outlined">{{val.icon}}</span>
+      <span>{{val.title}}</span>
+    </a>
+  </li>
+  }
+</ol>

@@ -1,0 +1,63 @@
+<app-blank
+  [pageTitle]="title()"
+  [breadcrumbs]="breadcrumbs()"
+/>
+<!-- <div class="row">
+  <div class="col-md-4 col-12">
+    <div class="card-header">
+        <h4>Ürün Ekle</h4>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="">Ürün Adı</label>
+                <input type="text" class="form-control" placeholder="Ürün Adı" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="">Ürün Resmi</label>
+                <input type="text" class="form-control" placeholder="Ürün Resmi" />
+            </div>
+            <div class="form-group">
+                <label for="">Birim Fiyatı</label>
+                <input type="text" class="form-control" placeholder="Birim Fiyatı" />
+            </div>
+            <div class="form-group">
+                <label for="">Stok Miktarı</label>
+                <input type="text" class="form-control" placeholder="Stok Miktarı" />
+            </div>
+            <div class="form-group mt-2 d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+  <div class="row">
+    <div class="col-lg-5 col-md-4 col-12">
+      <div class="card border-0 shadow-lg rounded-4">
+        <div class="card-body p-5">
+          <h3 class="mb-4 text-center fw-bold" style="color: #6f2dff;">{{title()}}</h3>
+          <form class="ürünlerform" #form = "ngForm" autocomplete="off" (ngSubmit)="save(form)">
+            <div class="form-group mb-4">
+              <label class="form-label fw-semibold" for="productName">Kategori Adı</label>
+              <input type="text" id="productName" class="form-control form-control-lg" placeholder="Örneğin: Bluetooth Kulaklık" [(ngModel)]="data().name" name="Name" />
+            </div>
+
+             <div class="form-group mb-4">
+              <label class="form-label fw-semibold" for="productName">Kategori Url</label>
+              <input type="text" id="productName" class="form-control form-control-lg" placeholder="Örneğin: bluetooth-kulaklık" [(ngModel)]="data().url" name="url" />
+            </div>
+
+            <div class="d-grid">
+              <button  type="submit" class="btn btn-lg btn-primary rounded-pill mt-3">{{btnName()}}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+

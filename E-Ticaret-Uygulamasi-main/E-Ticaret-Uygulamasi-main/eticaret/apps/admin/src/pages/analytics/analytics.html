@@ -1,0 +1,471 @@
+<app-blank
+  pageTitle="Analiz"
+  [breadcrumbs]="[
+    { title: 'Ana sayfa', url: '/', icon: 'home' },
+    { title: ' Analiz', url: '/ai-analytics', icon: 'psychology' }
+  ]"
+></app-blank>
+
+<div class="page-header d-flex justify-content-between align-items-center flex-wrap gap-2">
+  <h1 class="page-title">
+    <span class="material-symbols-outlined me-2" style="vertical-align: middle;">psychology</span>
+    Analiz
+  </h1>
+  <div class="d-flex header-actions gap-2">
+    <button class="btn btn-sm btn-outline-secondary" (click)="refresh()" [disabled]="loading()">
+      <span class="material-symbols-outlined">refresh</span> Verileri Yenile
+    </button>
+    <button
+      class="btn btn-sm btn-primary"
+      (click)="runAnalysis()"
+      [disabled]="loading() || analyzing() || orders().length === 0"
+    >
+      @if (analyzing()) {
+        <span class="spinner-border spinner-border-sm me-1" role="status"></span>
+        Analiz Ediliyor...
+      } @else {
+        <span class="material-symbols-outlined">smart_toy</span> Analiz Et
+      }
+    </button>
+  </div>
+</div>
+
+<p class="text-muted mb-4">
+  Sipariş, ürün ve müşteri verilerinizi analiz eden; bölge, kategori, stok ve ödeme tercihlerine göre
+  tavsiyeler üreten modül.
+</p>
+
+@if (orders().length === 0 && !loading()) {
+  <div class="alert alert-info">
+    <span class="material-symbols-outlined me-2">info</span>
+    Henüz sipariş verisi bulunmuyor. Analiz yapabilmek için önce siparişlerin olması gerekiyor.
+  </div>
+}
+
+@if (loading()) {
+  <div class="text-center py-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2 text-muted">Veriler yükleniyor...</p>
+  </div>
+}
+
+@if (analysisResult(); as result) {
+  <div class="ai-analysis-result">
+    <!-- Özet kartlar -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-4 col-lg-2">
+        <div class="card stat-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted small">Toplam Sipariş</h6>
+            <h4 class="mb-0">{{ result.summary.totalOrders }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-2">
+        <div class="card stat-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted small">Toplam Gelir</h6>
+            <h4 class="mb-0">{{ result.summary.totalRevenue | trCurrency: '₺': false }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-2">
+        <div class="card stat-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted small">Ort. Sipariş</h6>
+            <h4 class="mb-0">{{ result.summary.avgOrderValue | trCurrency: '₺': false }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-2">
+        <div class="card stat-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted small">Satılan Ürün</h6>
+            <h4 class="mb-0">{{ result.summary.totalItemsSold }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-2">
+        <div class="card stat-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted small">Farklı Müşteri</h6>
+            <h4 class="mb-0">{{ result.summary.uniqueCustomers }}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-lg-2">
+        <div class="card stat-card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h6 class="text-muted small">Sipariş/Ürün Ort.</h6>
+            <h4 class="mb-0">{{ result.summary.avgItemsPerOrder }}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tavsiyeler -->
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">
+          <span class="material-symbols-outlined me-2">psychology</span>
+          Tavsiyeler ({{ result.recommendations.length }})
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="recommendations-list">
+          @for (rec of result.recommendations; track rec.priority) {
+            <div class="recommendation-item recommendation-{{ rec.type }}">
+              <div class="rec-icon">
+                <span class="material-symbols-outlined">{{ getTypeIcon(rec.type) }}</span>
+              </div>
+              <div class="rec-content">
+                <h6 class="rec-title">{{ rec.title }}</h6>
+                <p class="rec-desc mb-0">{{ rec.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+  <!-- Ürün & Şehir -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">En Çok Satan Ürünler</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Ürün</th>
+                    <th>Adet</th>
+                    <th>Gelir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (p of result.summary.topProducts; track p.name) {
+                    <tr>
+                      <td>{{ p.name }}</td>
+                      <td>{{ p.quantity }}</td>
+                      <td>{{ p.revenue | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">İl Bazlı Dağılım</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>İl</th>
+                    <th>Sipariş</th>
+                    <th>Gelir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (c of result.summary.cityDistribution; track c.city) {
+                    <tr>
+                      <td>{{ c.city }}</td>
+                      <td>{{ c.count }}</td>
+                      <td>{{ c.revenue | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- İlçe & Kategori -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">İlçe Bazlı Dağılım</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>İl</th>
+                    <th>İlçe</th>
+                    <th>Sipariş</th>
+                    <th>Gelir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (d of result.summary.districtDistribution; track d.city + d.district) {
+                    <tr>
+                      <td>{{ d.city }}</td>
+                      <td>{{ d.district }}</td>
+                      <td>{{ d.count }}</td>
+                      <td>{{ d.revenue | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">Kategori Satışları</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Kategori</th>
+                    <th>Adet</th>
+                    <th>Gelir</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (cat of result.summary.categorySales; track cat.categoryName) {
+                    <tr>
+                      <td>{{ cat.categoryName }}</td>
+                      <td>{{ cat.quantity }}</td>
+                      <td>{{ cat.revenue | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ödeme & Durum -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">Ödeme Tercihleri</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Seçenek</th>
+                    <th>Sipariş</th>
+                    <th>Oran</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (inst of result.summary.installmentStats; track inst.option) {
+                    <tr>
+                      <td>{{ inst.option }}</td>
+                      <td>{{ inst.count }}</td>
+                      <td>{{ inst.percentage }}%</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">Sipariş Durumları</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Durum</th>
+                    <th>Sipariş</th>
+                    <th>Oran</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (st of result.summary.statusStats; track st.status) {
+                    <tr>
+                      <td>{{ st.status }}</td>
+                      <td>{{ st.count }}</td>
+                      <td>{{ st.percentage }}%</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Müşteriler & Stok -->
+    <div class="row g-3 mb-4">
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">En İyi Müşteriler</h5>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Müşteri</th>
+                    <th>Sipariş</th>
+                    <th>Harcanan</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (cust of result.summary.topCustomers; track cust.name) {
+                    <tr>
+                      <td>{{ cust.name }}</td>
+                      <td>{{ cust.orderCount }}</td>
+                      <td>{{ cust.spent | trCurrency: '₺': false }}</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100">
+          <div class="card-header">
+            <h5 class="mb-0">Düşük Stoklu Ürünler</h5>
+          </div>
+          <div class="card-body p-0">
+            @if (result.summary.lowStockProducts.length === 0) {
+              <div class="alert alert-success m-3 mb-0 small">Kritik stok seviyesinde ürün yok.</div>
+            } @else {
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>Ürün</th>
+                      <th>Kategori</th>
+                      <th>Stok</th>
+                      <th>Fiyat</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (p of result.summary.lowStockProducts; track p.name) {
+                      <tr>
+                        <td>{{ p.name }}</td>
+                        <td>{{ p.categoryName }}</td>
+                        <td>
+                          <span class="badge bg-warning text-dark">{{ p.stock }}</span>
+                        </td>
+                        <td>{{ p.price | trCurrency: '₺': false }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @if (result.summary.unsoldProducts.length > 0) {
+      <div class="card border-0 shadow-sm mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Henüz Satılmayan Ürünler</h5>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>Ürün</th>
+                  <th>Kategori</th>
+                  <th>Stok</th>
+                  <th>Fiyat</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of result.summary.unsoldProducts; track p.name) {
+                  <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.categoryName }}</td>
+                    <td>{{ p.stock }}</td>
+                    <td>{{ p.price | trCurrency: '₺': false }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Son siparişler -->
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-header">
+        <h5 class="mb-0">Son Siparişler</h5>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Sipariş No</th>
+                <th>Müşteri</th>
+                <th>İl / İlçe</th>
+                <th>Ürün Adedi</th>
+                <th>Ödeme</th>
+                <th>Tarih</th>
+                <th>Tutar</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (order of result.summary.recentOrders; track order.orderNumber) {
+                <tr>
+                  <td>{{ order.orderNumber }}</td>
+                  <td>{{ order.fullName }}</td>
+                  <td>{{ order.city }} / {{ order.district }}</td>
+                  <td>{{ order.itemCount }}</td>
+                  <td>{{ order.installment }}</td>
+                  <td>{{ order.date | date: 'dd.MM.yyyy HH:mm' }}</td>
+                  <td>{{ order.total | trCurrency: '₺': false }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rapor -->
+    <div class="card border-0 shadow-sm">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Rapor Özeti</h5>
+        <button class="btn btn-sm btn-outline-primary" (click)="copyReport(result.report)">
+          <span class="material-symbols-outlined">content_copy</span> Kopyala
+        </button>
+      </div>
+      <div class="card-body">
+        <pre class="report-text mb-0">{{ result.report }}</pre>
+      </div>
+    </div>
+  </div>
+}

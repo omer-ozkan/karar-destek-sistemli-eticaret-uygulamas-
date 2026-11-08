@@ -1,0 +1,94 @@
+<title>Store | Giriş Yap</title>
+<div class="login-header">
+  <div class="login-icon">
+    <i class="fas fa-user-circle"></i>
+  </div>
+  <h1>Hoş Geldiniz</h1>
+  <p>Hesabınızla giriş yaparak alışverişe devam edin</p>
+</div>
+
+<div class="login-tabs">
+  <button routerLink="/auth/login" class="tab-btn active">
+    <i class="fas fa-sign-in-alt"></i>
+    Giriş Yap
+  </button>
+  <button routerLink="/auth/register" class="tab-btn">
+    <i class="fas fa-user-plus"></i>
+    Kayıt Ol
+  </button>
+</div>
+
+<!-- Register Form -->
+<div class="tab-content active">
+  <form #ngForm="ngForm" class="auth-form" (ngSubmit)="signIn(ngForm)">
+    <div class="form-row">
+    </div>
+
+    <div class="form-group">
+      <label for="registerUserName">Kullanıcı Adı</label>
+      <div class="input-group">
+        <i class="fas fa-person"></i>
+        <input
+          type="text"
+          ngModel
+          name="userName"
+          placeholder="kullaniciAdi"
+          required
+        />
+      </div>
+    </div>
+
+    <!-- <div class="form-group">
+      <label for="phone">Telefon</label>
+      <div class="input-group">
+        <i class="fas fa-phone"></i>
+        <input type="tel" id="phone" required placeholder="0555 123 45 67" />
+      </div>
+    </div> -->
+
+    <div class="form-group">
+      <div class="form-group">
+        <label for="registerPassword">Şifre</label>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            ngModel
+            name="password"
+            placeholder="Şifrenizi girin"
+            required
+          />
+          <!-- <button type="button" class="password-toggle">
+            <i class="fas fa-eye"></i>
+          </button> -->
+        </div>
+      </div>
+      <!-- <div class="form-group">
+        <label for="confirmPassword">Şifre Tekrar</label>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            id="confirmPassword"
+            required
+            placeholder="Şifrenizi tekrarlayın"
+          />
+          <button type="button" class="password-toggle">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+      </div> -->
+    </div>
+
+
+    <button type="submit" class="auth-btn">
+      <i class="fas fa-sign-in-alt"></i>
+      Giriş Yap
+    </button>
+  </form>
+</div>
+
+
+
+
+

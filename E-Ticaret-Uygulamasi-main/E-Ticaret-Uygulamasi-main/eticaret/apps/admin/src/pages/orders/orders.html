@@ -1,0 +1,61 @@
+<app-blank
+  pageTitle="Siparişler"
+  [breadcrumbs]="[{ title: 'Siparişler', url: '/orders', icon: 'shopping_cart' }]"
+></app-blank>
+
+<flexi-grid
+  [data]="data()"
+  [loading]="loading()"
+  language="tr"
+  [showCaption]="true"
+  captionTitle="Sipariş Listesi"
+  [showExportExcelBtn]="true"
+  exportExcelFileName="Siparisler"
+  (onRefresh)="result.reload()"
+>
+  <flexi-grid-column field="orderNumber" title="Sipariş No" />
+  <flexi-grid-column field="fullName" title="Müşteri" />
+  <flexi-grid-column field="city" title="Şehir" />
+  <flexi-grid-column field="date" title="Tarih" filterType="date">
+    <ng-template flexiGridCellTemplate let-item>
+      {{ item.date | date: 'dd.MM.yyyy HH:mm' }}
+    </ng-template>
+  </flexi-grid-column>
+  <flexi-grid-column field="status" title="Durum" filterType="select" [filterData]="statusFilter()">
+    <ng-template flexiGridCellTemplate let-item>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge" [class]="statusBadgeClass(item.status)">
+          {{ displayStatus(item.status) }}
+        </span>
+        <select
+          class="form-select form-select-sm"
+          style="max-width: 180px"
+          [ngModel]="displayStatus(item.status)"
+          (ngModelChange)="changeStatus(item, $event)"
+        >
+          @for (status of statuses; track status) {
+            <option [value]="status">{{ status }}</option>
+          }
+        </select>
+      </div>
+    </ng-template>
+  </flexi-grid-column>
+  <flexi-grid-column field="total" title="Tutar" filterType="number" textAlign="right">
+    <ng-template flexiGridCellTemplate let-item>
+      {{ orderAmount(item) | trCurrency: '₺': false }}
+    </ng-template>
+  </flexi-grid-column>
+
+  <ng-template flexiGridColumnCommandTemplate let-item>
+    @if (displayStatus(item.status) === 'Hazırlanıyor') {
+      <flexi-button
+        (click)="markAsShipped(item)"
+        btnIcon="local_shipping"
+        btnColor="info"
+        btnSize="small"
+        title="Kargoya Ver"
+        flexiTooltip
+      ></flexi-button>
+    }
+  </ng-template>
+</flexi-grid>

@@ -1,0 +1,251 @@
+<p>layouts works!</p>
+<!-- Header/Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container-fluid">
+            <button class="btn d-md-none" id="sidebarToggle">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <!-- Bread Crumb -->
+            <div class="breadcrumb-container position-relative d-none d-md-block" style="width: 250px;">
+                <nav aria-label="breadcrumb" class="modern-breadcrumb">
+                    <app-breadcrumb></app-breadcrumb>
+                </nav>
+            </div>
+
+            <!-- Search Bar
+            <div class="search-container d-none d-md-block mx-auto">
+                <div class="position-relative">
+                    <input type="text" class="form-control search-input" placeholder="Search...">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                </div>
+            </div> -->
+
+            <div class="ms-auto d-flex align-items-center">
+                <!-- Language Selector
+                <div class="dropdown me-3 language-container">
+                    <button class="btn btn-link p-0 language-btn" type="button" id="languageDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://flagicons.lipis.dev/flags/4x3/tr.svg" alt="Türkçe" class="language-flag">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="languageDropdown">
+                        <li>
+                            <a class="dropdown-item small-text" href="#">
+                                <img src="https://flagicons.lipis.dev/flags/4x3/gb.svg" alt="English"
+                                    class="language-flag me-2">
+                                English
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item small-text" href="#">
+                                <img src="https://flagicons.lipis.dev/flags/4x3/tr.svg" alt="Turkish"
+                                    class="language-flag me-2">
+                                Turkish
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item small-text" href="#">
+                                <img src="https://flagicons.lipis.dev/flags/4x3/de.svg" alt="Deutsch"
+                                    class="language-flag me-2">
+                                German
+                            </a>
+                        </li>
+                    </ul>
+                </div> -->
+
+                <!-- Notification
+                <div class="dropdown me-3 notification-container">
+                    <button class="btn btn-link p-0 notification-btn position-relative" type="button"
+                        id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
+                        aria-labelledby="notificationDropdown">
+                        <li class="dropdown-header">Notifications</li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item notification-item" href="#">
+                                <div class="notification-icon bg-primary">
+                                    <span class="material-symbols-outlined">description</span>
+                                </div>
+                                <div class="notification-content">
+                                    <p class="notification-text">New invoice created</p>
+                                    <p class="notification-time">10 minutes ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item notification-item" href="#">
+                                <div class="notification-icon bg-success">
+                                    <span class="material-symbols-outlined">shopping_cart</span>
+                                </div>
+                                <div class="notification-content">
+                                    <p class="notification-text">New order received</p>
+                                    <p class="notification-time">1 hour ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item notification-item" href="#">
+                                <div class="notification-icon bg-warning">
+                                    <span class="material-symbols-outlined">error</span>
+                                </div>
+                                <div class="notification-content">
+                                    <p class="notification-text">Inventory alert</p>
+                                    <p class="notification-time">2 hours ago</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-center view-all" href="#">View All</a></li>
+                    </ul>
+                </div> -->
+
+                <!-- Theme Toggle Button
+                <div class="theme-toggle me-3">
+                    <button class="btn btn-link p-0" id="themeToggle" title="Dark/Light Mode">
+                        <span class="material-symbols-outlined theme-icon-light">light_mode</span>
+                        <span class="material-symbols-outlined theme-icon-dark d-none">dark_mode</span>
+                    </button>
+                </div> -->
+
+                <!-- User Dropdown -->
+                <div class="dropdown">
+                    <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+                        style="color: var(--text-color);" href="#" id="userDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="avatar">
+                            <img src="/userp.png" alt="User Avatar" width="40" height="40" style="object-fit: cover; border-radius: 50%;">
+                        </div>
+                        <div class="d-flex flex-direction-column">
+                            <span class="d-none d-md-inline small-text">{{user().fullName}}</span>
+                            <span class="d-none d-md-inline small-x-text">{{user().email}}</span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item small-text" href="#"><span
+                                    class="material-symbols-outlined me-2">account_circle</span>Profil</a></li>
+                        <li><a class="dropdown-item small-text" href="#"><span
+                                    class="material-symbols-outlined me-2">settings</span>Ayarlar</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item small-text"
+                               (click)="logout()"
+                               (keydown.enter)="logout()"
+                               (keydown.space)="logout()"
+                               tabindex="0"
+                               role="button">
+                                <span class="material-symbols-outlined me-2">logout</span>Çıkış
+                            </a>
+                         </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <!-- Brand -->
+            <div class="sidebar-brand d-flex align-items-center justify-content-between">
+                <a href="#" class="d-flex gap-3 logo">
+                    <img src="/AngularLogoGradient.webp" alt="Angular Logo" width="50" height="50" style="object-fit: contain;">
+                    <span>E-ticaret Admin</span>
+                </a>
+                <button class="btn-close-sidebar d-md-none">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <!-- User Profile -->
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="/userp.png" alt="User Avatar" width="40" height="40" style="object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">{{user().fullName}}</span>
+                </div>
+            </div>
+
+            <!-- Sidebar Search -->
+            <div class="sidebar-search">
+                <div class="position-relative">
+                    <input type="text" class="form-control sidebar-search-input" [(ngModel)]="search" placeholder="Menüde Ara...">
+                    <span class="material-symbols-outlined sidebar-search-icon">search</span>
+                </div>
+            </div>
+
+            <!-- Navigation Menu -->
+            <ul class="nav-menu">
+                @for (nav of navigations() | nav:search(); track nav.url){
+                    <li class="nav-item">
+                    <a routerLink="{{ nav.url }}" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+                        <div class="nav-icon-text">
+                            <span class="nav-icon material-symbols-outlined">{{ nav.icon }}</span>
+                            <span>{{ nav.title }}</span>
+                        </div>
+                    </a>
+                </li>
+                }
+
+            </ul>
+
+            <!-- Sticky Footer Menu for Important Items (HTML) -->
+            <div class="sidebar-sticky-menu">
+                <!-- Örneğin önemli ve sık kullanılan menüler -->
+                <a href="#" class="sticky-menu-item" title="Ayarlar">
+                    <span class="material-symbols-outlined">settings</span>
+                </a>
+                <a href="#" class="sticky-menu-item" title="Yardım">
+                    <span class="material-symbols-outlined">help</span>
+                </a>
+                <a (click)="logout()" 
+                   (keydown.enter)="logout()" 
+                   (keydown.space)="logout()"
+                   tabindex="0"
+                   role="button"
+                   class="sticky-menu-item" 
+                   title="Çıkış">
+                    <span class="material-symbols-outlined">logout</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Page Content -->
+        <!-- Main Content Area -->
+        <div id="page-content-wrapper">
+            <!-- Main Content Container -->
+            <div class="content-container">
+                <router-outlet></router-outlet>
+            </div>
+
+            <div class="content-scroll-top" id="contentScrollTop">
+                <button class="btn-content-scroll-top">
+                    <span class="material-symbols-outlined">arrow_upward</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+            <!-- Footer -->
+    <footer class="fixed-footer">
+        <div class="footer-left">
+            <span class="material-symbols-outlined">schedule</span>
+            <span class="time-display"> {{ time() | date: 'dd MMM yyyy h:mm:ss a' }} </span>
+        </div>
+        <div class="footer-center">
+            <span>&copy; 2025 Admin - Version 1.0.2</span>
+        </div>
+        <div class="footer-right">
+            <a href="#" class="footer-link">Support</a>
+            <a href="#" class="footer-link">Documentation</a>
+            <a href="#" class="footer-link d-none d-md-inline-block">License</a>
+        </div>
+    </footer>

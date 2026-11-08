@@ -1,0 +1,464 @@
+{
+  "products": [
+    {
+      "id": "ba3f",
+      "name": "iphone 16 pro",
+      "imageUrl": "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/apple/thumb/1-244_large.jpg",
+      "price": 90000,
+      "stock": 10,
+      "categoryId": "ba3f",
+      "categoryName": "Telefon",
+      "categoryUrl": "telefon"
+    },
+    {
+      "id": "e0a7",
+      "name": "apple ipad pro",
+      "imageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+      "price": 49999,
+      "stock": 50,
+      "categoryId": "2d32",
+      "categoryName": "Tablet",
+      "categoryUrl": "tablet"
+    },
+    {
+      "id": "1a15",
+      "name": "macbook pro ",
+      "imageUrl": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mbp14-spaceblack-select-202410?wid=892&hei=820&fmt=jpeg&qlt=90&.v=YnlWZDdpMFo0bUpJZnBpZjhKM2M3VGhTSEZFNjlmT2xUUDNBTjljV1BxWjZkZE52THZKR1lubXJyYmRyWWlhOXZvdUZlR0V0VUdJSjBWaDVNVG95Yk15Y0c3T3Y4UWZwZExHUFdTUC9lN28",
+      "price": 89999,
+      "stock": 35,
+      "categoryId": "254b",
+      "categoryName": "Bilgisayar",
+      "categoryUrl": "bilgisayar"
+    },
+    {
+      "id": "a2d5",
+      "name": "Apple watch",
+      "imageUrl": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MYPD3ref_VW_34FR+watch-case-49-titanium-black-ultra2_VW_34FR+watch-face-49-ocean-ultra2_VW_34FR_GEO_TR?wid=2000&hei=2000&fmt=png-alpha&.v=VEREVGFsQzRDQXZXemdUckh4dmo3M2pDV2hhem5qNnpDenFtKzI1OXdzWjRaeVR4RW9XWXhWVHRHeXZEa3AwcGZsNDErT2hQbWVmS0VCWlVweVY1UHBiVmVXUVJPYnV1S0FZc3FMLzd3SDRnWGJhejlLNXhYODlVTzA3R2NWaFB1QjEvVElDNEVIWVBRdVMvczhoN1UwOXZLK1NkNS9RWHBDOXNOcjBoT3gxUEVlQjdXZGFpUmlBZmRDRDZlc1pSZzdhU3dWWG5aL1pTWlJoTzRCMlJ4Zw",
+      "price": 55999,
+      "stock": 60,
+      "categoryId": "4704",
+      "categoryName": "Saat",
+      "categoryUrl": "saat"
+    },
+    {
+      "id": "f7dd",
+      "name": "logitech mx keys",
+      "imageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+      "price": 4199,
+      "stock": 35,
+      "categoryId": "6e68",
+      "categoryName": "Klavye",
+      "categoryUrl": "klavye"
+    }
+  ],
+  "categories": [
+    {
+      "id": "ba3f",
+      "name": "Telefon",
+      "url": "telefon"
+    },
+    {
+      "id": "2d32",
+      "name": "Tablet",
+      "url": "tablet"
+    },
+    {
+      "id": "4704",
+      "name": "Saat",
+      "url": "saat"
+    },
+    {
+      "id": "254b",
+      "name": "Bilgisayar",
+      "url": "bilgisayar"
+    },
+    {
+      "id": "6e68",
+      "name": "Klavye",
+      "url": "klavye"
+    },
+    {
+      "id": "b29a",
+      "name": "Mause",
+      "url": "mause"
+    },
+    {
+      "id": "bfd1",
+      "name": "Monitör",
+      "url": "monitor"
+    }
+  ],
+  "users": [
+    {
+      "id": "8ffc",
+      "firstName": "Ömer",
+      "lastName": "Özkan",
+      "fullName": "Ömer  Özkan",
+      "userName": "ozkan",
+      "email": "omerozkan@gmail.com",
+      "password": "1234",
+      "isAdmin": true
+    },
+    {
+      "id": "dd99",
+      "firstName": "omer",
+      "lastName": "ozkan",
+      "fullName": "omer  ozkan",
+      "userName": "omer",
+      "email": "omer@gmail.com",
+      "password": "12345",
+      "isAdmin": false
+    }
+  ],
+  "baskets": [
+    {
+      "id": "5077",
+      "userId": "8ffc",
+      "productId": "ba3f",
+      "productName": "iphone 16 pro",
+      "productPrice": 90000,
+      "productImageUrl": "https://cdn.vatanbilgisayar.com/Upload/PRODUCT/apple/thumb/1-244_large.jpg",
+      "quantity": 1
+    },
+    {
+      "id": "5db7",
+      "userId": "8ffc",
+      "productId": "e0a7",
+      "productName": "apple ipad pro",
+      "productPrice": 49999,
+      "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+      "quantity": 1
+    },
+    {
+      "id": "26e3",
+      "userId": "8ffc",
+      "productId": "1a15",
+      "productName": "macbook pro ",
+      "productPrice": 89999,
+      "productImageUrl": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/mbp14-spaceblack-select-202410?wid=892&hei=820&fmt=jpeg&qlt=90&.v=YnlWZDdpMFo0bUpJZnBpZjhKM2M3VGhTSEZFNjlmT2xUUDNBTjljV1BxWjZkZE52THZKR1lubXJyYmRyWWlhOXZvdUZlR0V0VUdJSjBWaDVNVG95Yk15Y0c3T3Y4UWZwZExHUFdTUC9lN28",
+      "quantity": 1
+    }
+  ],
+  "orders": [
+    {
+      "id": "9722",
+      "fullName": "ömer özkan",
+      "userId": "dd99",
+      "orderNumber": "TS-2026-1782208120572",
+      "date": "2026-06-23T09:48:40.572Z",
+      "phoneNumber": "6734276342",
+      "city": "İstanbul",
+      "district": "ÜSKÜDAR",
+      "fullAddress": "demokrasi mahallesi",
+      "cardNumber": "3123213123123123",
+      "cardOwnerName": "ömer özkan",
+      "expiresDate": "1312",
+      "cvv": "323",
+      "installmentOptions": "Tek çekim",
+      "status": "Hazırlanıyor",
+      "baskets": [
+        {
+          "id": "cde6",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "1ab8",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "95fa",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "6f71",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "ba4c",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "f8ae",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "0762",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "ad59",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "009c",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "1a2d",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "3c32",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "9a6b",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "efa7",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "05a3",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "2465",
+      "fullName": "adem",
+      "userId": "dd99",
+      "orderNumber": "TS-2026-1782425840306",
+      "date": "2026-06-25T22:17:20.306Z",
+      "phoneNumber": "4343434343",
+      "city": "Afyonkarahisar",
+      "district": "MERKEZ",
+      "fullAddress": "merkez",
+      "cardNumber": "3432423423423454",
+      "cardOwnerName": "adem adem",
+      "expiresDate": "3434",
+      "cvv": "423",
+      "installmentOptions": "Tek çekim",
+      "status": "Hazırlanıyor",
+      "baskets": [
+        {
+          "id": "21bd",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "eb93",
+      "fullName": "fdfdf",
+      "userId": "dd99",
+      "orderNumber": "TS-2026-1782426558007",
+      "date": "2026-06-25T22:29:18.007Z",
+      "phoneNumber": "4343454545",
+      "city": "Eskişehir",
+      "district": "BEYLİKOVA",
+      "fullAddress": "dedasd",
+      "cardNumber": "2352352345235235",
+      "cardOwnerName": "fdsfsdfsd",
+      "expiresDate": "2345",
+      "cvv": "034",
+      "installmentOptions": "Tek çekim",
+      "status": "Hazırlanıyor",
+      "baskets": [
+        {
+          "id": "7f7a",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "7bc8",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        },
+        {
+          "id": "3aba",
+          "userId": "dd99",
+          "productId": "f7dd",
+          "productName": "logitech mx keys",
+          "productPrice": 4199,
+          "productImageUrl": "https://resource.logitech.com/w_800,c_lpad,ar_1:1,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mx-keys-combo-business-gen-2/gallery/mx-keys-combo-business-gen-2-gallery-us-graphite-1.png?v=1",
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "id": "a683",
+      "fullName": "ayşe fatih",
+      "userId": "dd99",
+      "orderNumber": "TS-2026-1782426867249",
+      "date": "2026-06-25T22:34:27.249Z",
+      "phoneNumber": "3423525235",
+      "city": "Kilis",
+      "district": "ELBEYLİ",
+      "fullAddress": "rwerwerwe",
+      "cardNumber": "5443534545435346",
+      "cardOwnerName": "ayşe fatih",
+      "expiresDate": "4343",
+      "cvv": "054",
+      "installmentOptions": "12 Taksit",
+      "status": "Hazırlanıyor",
+      "baskets": [
+        {
+          "id": "1455",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "82f0",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "a5b5",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "9c50",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "ddd0",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "822e",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "2519",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "3589",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        },
+        {
+          "id": "2563",
+          "userId": "dd99",
+          "productId": "e0a7",
+          "productName": "apple ipad pro",
+          "productPrice": 49999,
+          "productImageUrl": "https://m.media-amazon.com/images/I/81c+9BOQNWL.jpg",
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

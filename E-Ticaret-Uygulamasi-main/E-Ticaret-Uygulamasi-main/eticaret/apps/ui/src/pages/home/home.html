@@ -1,0 +1,50 @@
+<title>Store | Ana Sayfa</title>
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>En Yeni Teknoloji Ürünleri</h1>
+    <p>Kaliteli ve uygun fiyatlı teknoloji ürünleri için doğru adres</p>
+  </div>
+</section>
+
+<!-- Products Section -->
+<section class="products">
+  <div class="container">
+    <h2 class="section-title">Ürünler</h2>
+    <div class="products-grid">
+     
+      @if(loading()){
+        @for(val of placeholderCount(); track val){
+                <div class="product-card placeholder-glow">
+                    <div class="placeholder" style="width: 100%; height: 200px; margin-bottom: 20px;"></div>
+                    <h3 class="placeholder">iPhone 15 Pro</h3>
+                    <p class="price placeholder">45.999 ₺</p>
+                    <button class="add-to-cart placeholder">Sepete Ekle</button>
+                </div>
+        }
+
+      }@else{
+          @for(val of dataSignal(); track val.id){
+      <div class="product-card">
+        <img [src]="val.imageUrl" [alt]="val.name" />
+        <h3>{{val.name}}</h3>
+        <p class="price">{{val.price | trCurrency: '₺': false}}</p>
+        @if(user()){
+        <button class="add-to-cart" (click)="addBasket(val)">Sepete Ekle</button>
+        }@else{
+        <button disabled class="add-to-cart">Giriş yapmalısınız</button>
+        }
+      </div>
+      }
+    }
+      <div
+        class="search-results"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
+      ></div>
+
+    </div>
+  </div>
+</section>
